@@ -1,19 +1,28 @@
 package com.example.swagger.controller;
 
+import com.example.swagger.dto.RequestDTO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import javax.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/")
 public class ExampleController {
 
+
     @GetMapping("/test")
-    public String testGet() {
+    public String testGet2() {
+        return "get method";
+    }
+
+    @GetMapping("/test/{id}/item")
+    public String testGet(@PathParam("id") Integer id) {
         return "get method";
     }
 
@@ -25,6 +34,11 @@ public class ExampleController {
     @PutMapping("/test")
     public String testPut(@RequestParam String param) {
         return "put method" + param;
+    }
+
+    @PutMapping("/test/{id}")
+    public String testUpdateData(@PathParam("id") Integer id, @RequestBody RequestDTO request) {
+        return "put method";
     }
 
     @ApiOperation(value = "getGreeting", nickname = "getGreeting")
